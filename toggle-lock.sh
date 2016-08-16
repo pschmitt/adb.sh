@@ -9,10 +9,16 @@ usage() {
     echo "$(basename $0) PIN"
 }
 
-if [[ $# -lt 1 ]]
+if [[ "$#" -lt 1 ]]
 then
     usage
     exit 2
 fi
 
-unlock "$1"
+if screen_is_off
+then
+    unlock "$1"
+else
+    lock
+fi
+
