@@ -32,8 +32,7 @@ get_app_package() {
 get_main_activity() {
     # Usage: get_main_activity PACKAGE
     # eg: get_main_activity com.nianticlabs.pokemongo
-    # adb shell pm dump "$1" | grep -A 1 MAIN
-    adb shell pm dump "$1" | grep -A1 -m 1 MAIN | awk 'END { print $2 }'
+    adb shell pm dump "$1" | grep -A1 -m 1 MAIN | awk 'END { print $2 }' | tr -dc '[[:print:]]'
 }
 
 stop_app() {
@@ -44,8 +43,8 @@ stop_app() {
 start_app() {
     # echo "Not implemented yet" 2>&1
     local activity=$(get_main_activity "$1")
-    echo "START THIS $activity"
-    echo adb shell am start "$activity"
+    echo "START THIS XX${activity}XX"
+    adb shell am start "$activity"
 }
 
 restart_app() {
