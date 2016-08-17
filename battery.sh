@@ -1,4 +1,14 @@
 #!/usr/bin/env sh
 
-# adb shell acpi | awk '{ print $NF }'
-adb shell dumpsys power | sed -n 's/.* mBatteryLevel=\(.*\)/\1/p'
+cd $(readlink -f $(dirname "$0"))
+
+. lib/battery.sh
+
+bat_lvl=$(battery_level)
+
+if is_charging
+then
+    echo "${bat_lvl}+"
+else
+    echo "${bat_lvl}"
+fi
