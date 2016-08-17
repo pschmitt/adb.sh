@@ -35,6 +35,10 @@ get_main_activity() {
     adb shell pm dump "$1" | grep -A1 -m 1 MAIN | awk 'END { print $2 }' | tr -dc '[[:print:]]'
 }
 
+current_activity() {
+    adb shell dumpsys window windows | sed -n 's/.*mCurrentFocus=.*{\(.*\)}/\1/p' | awk '{ print $NF }'
+}
+
 stop_app() {
     # echo "Not implemented yet" 2>&1
     adb shell am force-stop "$1"
