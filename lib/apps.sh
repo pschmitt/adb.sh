@@ -47,7 +47,6 @@ stop_app() {
 start_app() {
     # echo "Not implemented yet" 2>&1
     local activity=$(get_main_activity "$1")
-    echo "START THIS XX${activity}XX"
     adb shell am start "$activity"
 }
 
