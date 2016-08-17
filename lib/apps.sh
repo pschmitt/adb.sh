@@ -20,7 +20,7 @@ get_apk_location() {
 }
 
 list_packages() {
-    adb shell pm list packages | sed -n 's/package:\(.*\)/\1/p'
+    adb shell pm list packages | sed -n 's/package:\(.*\)/\1/p' | sort
 }
 
 get_app_package() {
