@@ -29,6 +29,38 @@ get_app_package() {
     echo "Not implemented yet" 2>&1
 }
 
+__known_packages() {
+    case "$1" in
+        "Pokémon GO"|"pokemon")
+            echo "com.nianticlabs.pokemongo"
+            ;;
+        "PushBullet"|"pb")
+            echo "com.pushbullet.android"
+            ;;
+        *)
+            # echo "Unknown app" >&2
+            echo
+            ;;
+    esac
+}
+
+__is_known_app() {
+    [[ -n $(known_packages "$1") ]]
+}
+
+__is_a_package_name() {
+    grep -q \\. <<< "$1"
+}
+
+__guess_package_name() {
+    if __is_a_package_name "$1"
+    then
+        echo "$1"
+    else
+        __known_packages "$1"
+    fi
+}
+
 get_main_activity() {
     # Usage: get_main_activity PACKAGE
     # eg: get_main_activity com.nianticlabs.pokemongo
@@ -41,12 +73,14 @@ current_activity() {
 
 stop_app() {
     # echo "Not implemented yet" 2>&1
-    adb shell am force-stop "$1"
+    local pkg=$(__guess_package_name "$1")
+    adb shell am force-stop "$pkg"
 }
 
 start_app() {
     # echo "Not implemented yet" 2>&1
-    local activity=$(get_main_activity "$1")
+    local pkg=$(__guess_package_name "$1")
+    local activity=$(get_main_activity "$pkg")
     adb shell am start "$activity"
 }
 
