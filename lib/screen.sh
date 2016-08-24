@@ -8,7 +8,7 @@ screen_is_on() {
 screen_is_off() {
     # adb shell dumpsys input_method | grep -q mInteractive=false
     # return ! is_screen_on
-    adb shell dumpsys power | grep -q mWakefulness=Asleep
+    adb shell dumpsys power | grep -qr "mWakefulness=[Asleep|Dozing]"
 }
 
 wake_screen() {
