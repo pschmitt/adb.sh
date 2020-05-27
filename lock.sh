@@ -1,8 +1,11 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-cd $(readlink -f $(dirname "$0"))
+cd "$(readlink -f "$(dirname "$0")")" || exit 9
 
-. lib/screen.sh
-. lib/lockscreen.sh
+# shellcheck disable=1091
+{
+  source lib/screen.sh
+  source lib/lockscreen.sh
+}
 
 lock
