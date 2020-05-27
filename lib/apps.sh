@@ -46,14 +46,14 @@ __known_packages() {
       ;;
     *)
       echo "Unknown app" >&2
-      exit 2
+      return 2
       echo
       ;;
   esac
 }
 
 __is_known_app() {
-  [[ -n $(known_packages "$1") ]]
+  [[ -n $(known_packages "$1" 2>/dev/null) ]]
 }
 
 __is_a_package_name() {
@@ -61,11 +61,15 @@ __is_a_package_name() {
 }
 
 __guess_package_name() {
-  if __is_a_package_name "$1"
+  local pkg_name
+  pkg_name="$(__known_packages "$1" 2>/dev/null)"
+
+  if [[ -n "$pkg_name" ]]
   then
-    echo "$1"
+    echo "$pkg_name"
   else
-    __known_packages "$1"
+    # Return first matching name
+    list_packages | grep -i -m 1 "$1"
   fi
 }
 
