@@ -31,6 +31,13 @@ lock() {
 }
 
 is_locked() {
+  local output
+  output="$(adb shell dumpsys window)"
+
+  if grep -q dreaming=true <<< "$output"
+  then
+    return
+  fi
   adb shell dumpsys window | \
     sed -nr 's/.*mDreamingLockscreen=(true|false).*/\1/p' | \
       grep -q true
