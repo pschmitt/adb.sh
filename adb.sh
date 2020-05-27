@@ -2,6 +2,21 @@
 
 cd "$(readlink -f "$(dirname "$0")")" || exit 9
 
+usage() {
+  echo "Usage: $(basename "$0") ACTION [PARAMS]"
+  echo "Available actions:"
+  echo "- app"
+  echo "- battery"
+  echo "- charging"
+  echo "- key"
+  echo "- lock"
+  echo "- screen"
+  echo "- screenshot"
+  echo "- toggle-lock"
+  echo "- unlock"
+  echo "- wake"
+}
+
 # Import all the stuff from lib
 for f in lib/*
 do
@@ -11,6 +26,10 @@ done
 unset f
 
 case "$1" in
+  help|--help|-h)
+    usage
+    exit 0
+    ;;
   lock)
     lock
     ;;
@@ -126,8 +145,14 @@ case "$1" in
     "$@"
     ;;
   *)
-    echo "Unknown command" >&2
-    exit 2
+    if command -v "$1" >/dev/null
+    then
+      "$@"
+    else
+      echo "Unknown command or function: $1" >&2
+      usage
+      exit 2
+    fi
     ;;
 esac
 
