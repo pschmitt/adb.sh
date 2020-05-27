@@ -1,35 +1,49 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 cd $(readlink -f $(dirname "$0"))
 
 # Import all the stuff from lib
 for f in lib/*
 do
-    . $f
+    . "$f"
 done
+unset f
 
 case "$1" in
     lock)
         lock
         ;;
     unlock)
-        if [[ -z "$2" ]]
-        then
-            echo "Missing PIN" >&2
-            exit 2
-        fi
         unlock "$2"
         ;;
     wake)
         wake_screen
         ;;
+    screen)
+        case "$2" in
+            on)
+                wake_screen
+                ;;
+            off)
+                screen_off
+                ;;
+            *)
+                screen_is_on && echo "on" || echo "off"
+                ;;
+        esac
+        ;;
+    screenshot)
+        DEST=${2:-screenshot.jpg}
+        echo "Capture screenshot and safe it to $DEST"
+        screenshot "$DEST"
+        ;;
     battery)
         battery_level
         ;;
     app)
-        if [[ $# -lt 3 ]]
+        if [[ $# -lt 2 ]]
         then
-            echo "Usage: start|stop|restart PACKAGE" >&2
+            echo "Usage: list|start|stop|restart PACKAGE" >&2
             exit 2
         fi
         case "$2" in
@@ -50,6 +64,36 @@ case "$1" in
                 exit 2
                 ;;
         esac
+        ;;
+    key)
+        if [[ $# -lt 2 ]]
+        then
+            echo "Usage: key KEYEVENT" >&2
+            exit 2
+        fi
+        case "$2" in
+            home)
+                keyevent=3 ;;
+            up)
+                keyevent=19 ;;
+            down)
+                keyevent=20 ;;
+            left)
+                keyevent=21 ;;
+            right)
+                keyevent=22 ;;
+            enter)
+                keyevent=66 ;;
+            vol_up)
+                keyevent=24 ;;
+            vol_down)
+                keyevent=25 ;;
+            paste)
+                keyevent=279 ;;
+            *)
+                keyevent="$2" ;;
+        esac
+        adb shell input keyevent "$keyevent"
         ;;
     *)
         echo "Unknown command" >&2

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 __swipe_up() {
     adb shell input swipe 200 900 200 300
@@ -10,14 +10,12 @@ __enter_pin() {
 }
 
 unlock() {
-    if [[ -z "$1" ]]
-    then
-        echo "No PIN provided" >&2
-        exit 3
-    fi
     wake_screen
     __swipe_up
-    __enter_pin "$1"
+    if [[ -n "$1" ]]
+    then
+        __enter_pin "$1"
+    fi
 }
 
 lock() {

@@ -37,8 +37,15 @@ __known_packages() {
         "PushBullet"|"pb")
             echo "com.pushbullet.android"
             ;;
+        "IPwebcam"|"cam")
+            echo "com.pas.webcam.pro"
+            ;;
+        "Kodi"|"kodi"|"xbmc")
+            echo "org.xbmc.kodi"
+            ;;
         *)
-            # echo "Unknown app" >&2
+            echo "Unknown app" >&2
+            exit 2
             echo
             ;;
     esac
@@ -64,7 +71,14 @@ __guess_package_name() {
 get_main_activity() {
     # Usage: get_main_activity PACKAGE
     # eg: get_main_activity com.nianticlabs.pokemongo
-    adb shell pm dump "$1" | grep -A1 -m 1 MAIN | awk 'END { print $2 }' | tr -dc '[[:print:]]'
+    case "$1" in
+        org.xbmc.kodi)
+            echo "org.xbmc.kodi/.Splash"
+            ;;
+        *)
+            adb shell pm dump "$1" | grep -A1 -m 1 MAIN | awk 'END { print $2 }' | tr -dc '[[:print:]]'
+            ;;
+    esac
 }
 
 current_activity() {
