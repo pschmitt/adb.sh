@@ -48,7 +48,6 @@ get_apk_location() {
   for apk_path in "${apk_paths[@]}"
   do
     # Filter out submatches
-    # Eg
     if grep -q "${pkg_name}\." <<< "$apk_path"
     then
       continue
