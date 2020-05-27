@@ -118,6 +118,7 @@ case "$1" in
     adb shell input keyevent "$keyevent"
     ;;
   scan|discover)
+    shift
     adbd_discover "$@"
     ;;
   exec)
