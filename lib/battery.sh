@@ -4,7 +4,7 @@ battery_level() {
   # adb shell acpi | awk '{ print $NF }'
   adb shell dumpsys power | \
     sed -n 's/.* mBatteryLevel=\([0-9]\+\)/\1/p' | \
-    head -1 | tr -dc '[:print:]'
+    head -1
 }
 
 is_charging() {
