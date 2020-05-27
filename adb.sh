@@ -28,7 +28,7 @@ case "$1" in
   wake)
     wake_screen
     ;;
-  screen)
+  screen|display)
     case "$2" in
       on)
         wake_screen

@@ -43,7 +43,7 @@ _adb.sh() {
             _describe -t commands "adb.sh commands" actions -V1
           fi
           ;;
-        screen)
+        screen|display)
           local -a actions=(
             "on:Turn screen on"
             "off:Turn screen off"
