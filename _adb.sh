@@ -17,6 +17,7 @@ _adb.sh() {
         "battery:Query battery level"
         "charging:Get charging state"
         "key:Send key input"
+        "exec:Execute arbitrary command from library"
       )
 
       _describe -t commands "adb.sh commands" actions -V1

@@ -117,6 +117,10 @@ case "$1" in
     esac
     adb shell input keyevent "$keyevent"
     ;;
+  exec)
+    shift
+    "$@"
+    ;;
   *)
     echo "Unknown command" >&2
     exit 2
