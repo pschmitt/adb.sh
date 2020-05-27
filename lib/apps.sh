@@ -3,7 +3,20 @@
 get_app_name_from_apk() {
   # Usage: get_app_name_from_apk APK
   # eg: get_app_name_from_apk /data/app/com.nianticlabs.pokemongo-2/base.apk
-  adb shell aapt dump badging "$1" | sed -n "s/application-label:'\(.*\)'/\1/p"
+
+  # FIXME This does not work for some apps...
+  # Like twitter for eg (com.twitter.android)
+  local apk_path="$1"
+  local output
+
+  if adb shell command -v aapt > /dev/null
+  then
+    output="$(adb shell "aapt dump badging $apk_path")"
+  else
+    local aapt=/data/data/com.termux/files/usr/bin/aapt
+    output="$(adb shell su -c "$aapt dump badging $apk_path")"
+  fi
+  sed -nr "s/.*label='([^']+)'.*/\1/p" <<< "$output" | head -1
 }
 
 get_app_name() {
