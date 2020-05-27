@@ -7,17 +7,18 @@ _adb.sh() {
   case "$state" in
     command)
       local -a actions=(
-        "lock:Lock screen"
-        "unlock:Unlock screen"
-        "toggle-lock:Toggle lockscreen state"
-        "wake:Wake screen"
-        "screen:Set screen state"
-        "screenshot:Take a screenshot"
         "app:Start/Stop or list apps (package names)"
         "battery:Query battery level"
         "charging:Get charging state"
-        "key:Send key input"
         "exec:Execute arbitrary command from library"
+        "key:Send key input"
+        "lock:Lock screen"
+        "scan:Scan the network for listening ADB daemons"
+        "screen:Set screen state"
+        "screenshot:Take a screenshot"
+        "toggle-lock:Toggle lockscreen state"
+        "unlock:Unlock screen"
+        "wake:Wake screen"
       )
 
       _describe -t commands "adb.sh commands" actions -V1

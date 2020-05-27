@@ -117,6 +117,9 @@ case "$1" in
     esac
     adb shell input keyevent "$keyevent"
     ;;
+  scan|discover)
+    adbd_discover "$@"
+    ;;
   exec)
     shift
     "$@"
