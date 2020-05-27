@@ -43,7 +43,7 @@ case "$1" in
     ;;
   screenshot)
     DEST=${2:-screenshot.jpg}
-    echo "Capture screenshot and safe it to $DEST"
+    echo "Capturing screenshot and saving it to $DEST"
     screenshot "$DEST"
     ;;
   battery)
