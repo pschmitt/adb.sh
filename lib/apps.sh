@@ -17,7 +17,51 @@ get_app_name() {
 get_apk_location() {
   # Usage: get_apk_location PACKAGE
   # eg: get_apk_location com.pushbullet.android
-  adb shell pm list packages -f "$1" | sed -n 's/package:\(.*\)=.*/\1/p'
+  local pkg_name="$1"
+  local apk_path
+  local -a apk_paths
+
+  while read -r apk_path
+  do
+    apk_paths+=("$apk_path")
+  done < <(adb shell pm list packages -f "$pkg_name" | sed -n 's/package:\(.*\)=.*/\1/p')
+
+  if [[ "${#apk_paths[@]}" == "1" ]]
+  then
+    echo "${apk_paths[1]}"
+    return
+  fi
+
+  # Search for best match
+  # At this point we have the following:
+  #
+  # pkg_name=com.termux
+  # apk_paths=(
+  #   /data/app/com.termux.api-FM0eQoDhHfgIomeaBC-TGA==/base.apk
+  #   /data/app/com.termux.tasker-Bj6KoFI4SXRFTZyYszpJ1g==/base.apk
+  #   /data/app/com.termux-5Nmgmxo_Wz3GLx27JvS34Q==/base.apk
+  # )
+  #
+  # So we need to get rid of com.termux.api and com.termux.tasker here
+
+  for apk_path in "${apk_paths[@]}"
+  do
+    # Filter out submatches
+    # Eg
+    if grep -q "${pkg_name}\." <<< "$apk_path"
+    then
+      continue
+    fi
+    echo "$apk_path"
+    return
+  done
+}
+
+get_app_label_from_package_name() {
+  local apk_path
+  apk_path="$(get_apk_location "$1")"
+
+  aapt dump badging "$apk_path" | sed -nr "s/.*label='([^']+)'.*/\1/p" | head -1
 }
 
 list_packages() {
