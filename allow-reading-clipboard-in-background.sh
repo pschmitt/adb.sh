@@ -27,6 +27,10 @@ then
     join)
       PKG_NAME=com.joaomgcd.join
       ;;
+    # FIXME This does not work for Termux::API since it does not request the
+    # WRITE_SECURE_SETTINGS permission
+    # https://github.com/termux/termux-api/issues/211
+    #
     # termux)
     #   PKG_NAME=com.termux.api
     #   ;;
