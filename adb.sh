@@ -18,7 +18,7 @@ case "$1" in
     unlock "$2"
     ;;
   toggle-lock)
-    if screen_is_off
+    if is_locked
     then
       unlock "$2"
     else
