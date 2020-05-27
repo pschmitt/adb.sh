@@ -43,4 +43,11 @@ is_locked() {
       grep -q true
 }
 
+is_unlocked() {
+  if is_locked
+  then
+    return 1
+  fi
+}
+
 # vim: set ft=bash et ts=2 sw=2 :
