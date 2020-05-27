@@ -42,3 +42,5 @@ then
 
   allow "$PKG_NAME"
 fi
+
+# vim: set ft=bash et ts=2 sw=2 :

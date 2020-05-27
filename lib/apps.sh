@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
 
 get_app_name_from_apk() {
   # Usage: get_app_name_from_apk APK
@@ -156,3 +156,5 @@ restart_app() {
   stop_app "$1"
   start_app "$1"
 }
+
+# vim: set ft=bash et ts=2 sw=2 :

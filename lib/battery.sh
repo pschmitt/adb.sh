@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
 
 battery_level() {
   # adb shell acpi | awk '{ print $NF }'
@@ -35,3 +35,5 @@ plug_type() {
       ;;
   esac
 }
+
+# vim: set ft=bash et ts=2 sw=2 :

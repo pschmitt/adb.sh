@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
 
 __swipe_up() {
   adb shell input swipe 200 900 200 300
@@ -36,3 +36,4 @@ is_locked() {
       grep -q true
 }
 
+# vim: set ft=bash et ts=2 sw=2 :

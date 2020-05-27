@@ -130,3 +130,5 @@ case "$1" in
     exit 2
     ;;
 esac
+
+# vim: set ft=bash et ts=2 sw=2 :

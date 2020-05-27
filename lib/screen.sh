@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
 
 screen_is_on() {
   # adb shell dumpsys input_method | grep -q mInteractive=true
@@ -24,3 +24,5 @@ wake_screen() {
 screen_off() {
   screen_is_off || adb shell input keyevent POWER
 }
+
+# vim: set ft=bash et ts=2 sw=2 :

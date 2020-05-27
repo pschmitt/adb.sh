@@ -1,4 +1,5 @@
 # shellcheck shell=bash
+
 __get_default_route() {
   ip -j r | jq '.[] | select(.dst == "default")'
 }
