@@ -24,11 +24,12 @@ get_apk_location() {
   while read -r apk_path
   do
     apk_paths+=("$apk_path")
-  done < <(adb shell pm list packages -f "$pkg_name" | sed -n 's/package:\(.*\)=.*/\1/p')
+  done < <(adb shell pm list packages -f "$pkg_name" | \
+            sed -n 's/package:\(.*\)=.*/\1/p')
 
   if [[ "${#apk_paths[@]}" == "1" ]]
   then
-    echo "${apk_paths[1]}"
+    echo "${apk_paths[0]}"
     return
   fi
 
