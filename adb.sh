@@ -17,6 +17,14 @@ case "$1" in
   unlock)
     unlock "$2"
     ;;
+  toggle-lock)
+    if screen_is_off
+    then
+      unlock "$2"
+    else
+      lock
+    fi
+    ;;
   wake)
     wake_screen
     ;;
