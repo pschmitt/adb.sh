@@ -17,6 +17,10 @@ plug_type() {
   plug_type="$(adb shell dumpsys power | sed -n 's/.*mPlugType=\([0-9]\+\).*/\1/p')"
 
   case "$plug_type" in
+    0)
+      echo "Not charging" >&2
+      return 1
+      ;;
     1)
       echo ac
       ;;

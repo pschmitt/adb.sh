@@ -41,6 +41,9 @@ case "$1" in
   battery)
     battery_level
     ;;
+  charging)
+    plug_type
+    ;;
   app)
     if [[ $# -lt 2 ]]
     then
