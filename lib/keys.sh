@@ -9,6 +9,7 @@ send_key() {
     return 2
   fi
 
+  # https://developer.android.com/reference/android/view/KeyEvent
   case "$key" in
     home)
       key=3
@@ -36,6 +37,9 @@ send_key() {
       ;;
     paste)
       key=279
+      ;;
+    menu)
+      key=82
       ;;
   esac
 
