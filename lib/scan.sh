@@ -31,8 +31,11 @@ adbd_discover() {
   local nw
   nw="${1:-$(__get_default_nw)}"
 
-  nmap --open -sT -p 5555 "$nw" 2>/dev/null | \
-    awk '/Nmap scan report for/ { print $NF }'
+  for _ in 1 2
+  do
+    nmap -oG - --open -sT -p 5555 "$nw" 2>/dev/null | \
+      awk '/Host:.*Ports: 5555\/open/ { print $2 }'
+  done | sort -u
 }
 
 # vim: set ft=bash et ts=2 sw=2 :
