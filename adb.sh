@@ -99,7 +99,7 @@ case "$1" in
   key)
     send_key "$2"
     ;;
-  scan|discover)
+  scan|discover|discovery)
     shift
     adbd_discover "$@"
     ;;
