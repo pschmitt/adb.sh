@@ -1,9 +1,11 @@
 #compdef adb.sh ads
 
 _adb.sh() {
+
   _arguments -C \
     '1: :->command'\
-    '*: :->argument' && ret=0
+    '*: :->argument'
+
   case "$state" in
     command)
       local -a actions=(
@@ -26,7 +28,7 @@ _adb.sh() {
     argument)
       case $words[2] in
         help)
-          _message "Display help message" && ret=0
+          _message "Display help message"
           ;;
         key)
           local -a actions=(
