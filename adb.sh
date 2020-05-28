@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-cd "$(readlink -f "$(dirname "$0")")" || exit 9
-
 usage() {
   echo "Usage: $(basename "$0") ACTION [PARAMS]"
   echo "Available actions:"
@@ -16,6 +14,8 @@ usage() {
   echo "- unlock"
   echo "- wake"
 }
+
+cd "$(readlink -f "$(dirname "$0")")" || exit 9
 
 # Import all the stuff from lib
 for f in lib/*
