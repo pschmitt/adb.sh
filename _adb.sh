@@ -40,6 +40,7 @@ _adb.sh() {
             "vol_up:VOLUME_UP"
             "vol_down:VOLUME_DOWN"
             "paste:PASTE"
+            "menu:MENU"
           )
           if [[ "$#words" == "3" ]]
           then
