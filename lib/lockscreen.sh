@@ -18,9 +18,6 @@ unlock() {
   wake_screen
   send_key menu
 
-  # We need to check again the lockscreen here since it may have been
-  # already unlocked by swiping up
-  # FIXME Detect if the lockscreen prompt is displayed
   if is_lockscreen_displayed && [[ -n "$1" ]]
   then
     __enter_pin "$1"
