@@ -33,8 +33,7 @@ lock() {
 
 is_locked() {
   adb shell su -c "dumpsys window" | \
-    sed -nr 's/.*mDreamingLockscreen=(true|false).*/\1/p' | \
-      grep -q true
+    grep -q "mDreamingLockscreen=true"
 }
 
 is_unlocked() {
