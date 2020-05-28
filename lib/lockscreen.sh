@@ -5,6 +5,10 @@ __enter_pin() {
   adb shell input keyevent ENTER
 }
 
+is_lockscreen_displayed() {
+  adb shell dumpsys power | grep -q 'mHoldingDisplaySuspendBlocker=true'
+}
+
 unlock() {
   if ! is_locked
   then
@@ -17,7 +21,7 @@ unlock() {
   # We need to check again the lockscreen here since it may have been
   # already unlocked by swiping up
   # FIXME Detect if the lockscreen prompt is displayed
-  if is_locked && [[ -n "$1" ]]
+  if is_lockscreen_displayed && [[ -n "$1" ]]
   then
     __enter_pin "$1"
   fi
