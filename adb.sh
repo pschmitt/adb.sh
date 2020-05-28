@@ -97,44 +97,7 @@ case "$1" in
     esac
     ;;
   key)
-    if [[ $# -lt 2 ]]
-    then
-      echo "Usage: key KEYEVENT" >&2
-      exit 2
-    fi
-    case "$2" in
-      home)
-        keyevent=3
-        ;;
-      up)
-        keyevent=19
-        ;;
-      down)
-        keyevent=20
-        ;;
-      left)
-        keyevent=21
-        ;;
-      right)
-        keyevent=22
-        ;;
-      enter)
-        keyevent=66
-        ;;
-      vol_up)
-        keyevent=24
-        ;;
-      vol_down)
-        keyevent=25
-        ;;
-      paste)
-        keyevent=279
-        ;;
-      *)
-        keyevent="$2"
-        ;;
-    esac
-    adb shell input keyevent "$keyevent"
+    send_key "$2"
     ;;
   scan|discover)
     shift
