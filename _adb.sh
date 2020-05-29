@@ -18,6 +18,8 @@ _adb.sh() {
         "scan:Scan the network for listening ADB daemons"
         "screen:Set screen state"
         "screenshot:Take a screenshot"
+        "type:Type on your device"
+        "text:Write text on your device. Either via pipe or direct input"
         "toggle-lock:Toggle lockscreen state"
         "unlock:Unlock screen"
         "wake:Wake screen"

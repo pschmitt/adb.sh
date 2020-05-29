@@ -99,6 +99,13 @@ case "$1" in
   key)
     send_key "$2"
     ;;
+  type|teletype)
+    teletype
+    ;;
+  text|sendtext)
+    shift
+    send_text "$@"
+    ;;
   scan|discover|discovery)
     shift
     adbd_discover "$@"
