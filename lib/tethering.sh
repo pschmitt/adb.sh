@@ -1,29 +1,11 @@
 # shellcheck shell=bash
 
 toggle_usb_tethering() {
-  local coords
+  toggle_setting .TetherSettings "USB tethering"
+}
 
-  unlock
-
-  adb shell am force-stop com.android.settings
-  # Send home in case the notifications bar is pulled down
-  send_key home
-  adb shell am start -a android.intent.action.MAIN -n com.android.settings/.TetherSettings
-
-  wait_for_activity com.android.settings
-
-  coords="$(get_screen_coords_of_text "USB tethering")"
-
-  if [[ -z "$coords" ]]
-  then
-    echo "Toggling USB tethering failed" >&2
-    return 1
-  fi
-  adb shell input tap "$coords"
-
-  # Clean up
-  wait_for_any_device
-  adb shell am force-stop com.android.settings
+toggle_bluetooth_tethering() {
+  toggle_setting .TetherSettings "Bluetooth tethering"
 }
 
 usb_tethering_is_on() {
