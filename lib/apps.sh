@@ -145,7 +145,7 @@ get_main_activity() {
 }
 
 current_activity() {
-  adb shell dumpsys window windows | \
+  adb shell su -c "dumpsys window windows" | \
     sed -n 's/.*mCurrentFocus=.*{\(.*\)}/\1/p' | awk '{ print $NF }'
 }
 

@@ -22,6 +22,7 @@ _adb.sh() {
         "text:Write text on your device. Either via pipe or direct input"
         "toggle-lock:Toggle lockscreen state"
         "unlock:Unlock screen"
+        "usb-tethering:USB tethering"
         "wake:Wake screen"
       )
 
@@ -54,6 +55,17 @@ _adb.sh() {
             "on:Turn screen on"
             "off:Turn screen off"
             "state:Show current screen state (on|off)"
+          )
+          if [[ "$#words" == "3" ]]
+          then
+            _describe -t commands "adb.sh commands" actions -V1
+          fi
+          ;;
+        usb-tethering|usbt)
+          local -a actions=(
+            "on:Turn USB tethering on"
+            "off:Turn USB tethering off"
+            "state:Show current USB tethering state (on|off)"
           )
           if [[ "$#words" == "3" ]]
           then

@@ -110,6 +110,19 @@ case "$1" in
     shift
     adbd_discover "$@"
     ;;
+  usb-tether|usbt|usb-tethering)
+    case "$2" in
+      on|enable)
+        enable_usb_tethering
+        ;;
+      off|disable)
+        disable_usb_tethering
+        ;;
+      *)
+        usb_tethering_is_on && echo "on" || echo "off"
+        ;;
+    esac
+    ;;
   exec)
     shift
     "$@"
