@@ -10,6 +10,8 @@ toggle_usb_tethering() {
   send_key home
   adb shell am start -a android.intent.action.MAIN -n com.android.settings/.TetherSettings
 
+  wait_for_activity com.android.settings
+
   coords="$(get_screen_coords_of_text "USB tethering")"
 
   if [[ -z "$coords" ]]
