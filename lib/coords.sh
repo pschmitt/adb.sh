@@ -6,6 +6,8 @@ get_screen_coords_of_text() {
   local text="$1"
   local tmpdump
 
+  unlock
+
   dump=$(adb shell uiautomator dump | sed -rn 's/.*dumped to: (.+)/\1/p')
   tmpdump="$(mktemp)"
   adb pull "$dump" "$tmpdump" >&2

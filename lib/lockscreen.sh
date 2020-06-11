@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 
 __enter_pin() {
-  adb shell input text "$1"
+  adb shell input text "${1:-$PIN}"
   adb shell input keyevent ENTER
 }
 
@@ -18,9 +18,10 @@ unlock() {
   wake_screen
   send_key menu
 
-  if is_lockscreen_displayed && [[ -n "$1" ]]
+  local pin="${1:-$PIN}"
+  if is_lockscreen_displayed && [[ -n "$pin" ]]
   then
-    __enter_pin "$1"
+    __enter_pin "$pin"
   fi
 }
 

@@ -3,6 +3,8 @@
 toggle_usb_tethering() {
   local coords
 
+  unlock
+
   adb shell am force-stop com.android.settings
   # Send home in case the notifications bar is pulled down
   send_key home

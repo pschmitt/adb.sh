@@ -26,6 +26,13 @@ done
 unset f
 
 case "$1" in
+  -p|--pin)
+    PIN="$2"
+    shift 2
+    ;;
+esac
+
+case "$1" in
   help|--help|-h)
     usage
     exit 0
