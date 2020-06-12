@@ -27,7 +27,7 @@ unset f
 
 case "$1" in
   -p|--pin)
-    PIN="$2"
+    ANDROID_PIN="$2"
     shift 2
     ;;
 esac
