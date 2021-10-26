@@ -9,9 +9,10 @@ _adb.sh() {
   case "$state" in
     command)
       local -a actions=(
-        "app:Start/Stop or list apps (package names)"
+        "app:Start/Stop, show current or list all apps (package names)"
         "battery:Query battery level"
         "charging:Get charging state"
+        "click:Click/tap on text"
         "exec:Execute arbitrary command from library"
         "key:Send key input"
         "lock:Lock screen"
@@ -76,6 +77,7 @@ _adb.sh() {
           if [[ "$#words" == "3" ]]
           then
             local -a actions=(
+              "current:Show current app package name"
               "list:List package names"
               "start:Start an app"
               "stop:Stop an app"
