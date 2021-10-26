@@ -86,6 +86,9 @@ case "$1" in
       exit 2
     fi
     case "$2" in
+      current)
+        current_app
+        ;;
       start)
         start_app "$3"
         ;;
@@ -99,7 +102,7 @@ case "$1" in
         list_packages
         ;;
       *)
-        echo "Unknown command. Use start|stop|restart|list" >&2
+        echo "Unknown command. Use start|stop|restart|current|list" >&2
         exit 2
         ;;
     esac

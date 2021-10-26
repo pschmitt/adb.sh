@@ -152,6 +152,12 @@ current_activity() {
     sed -n 's/.*mCurrentFocus=.*{\(.*\)}/\1/p' | awk '{ print $NF }'
 }
 
+current_app() {
+  # no su ?
+  adb shell dumpsys activity recents | \
+    sed -nr 's/.*Recent #0:.* A=[^:]+:([^ ]+) .*/\1/p'
+}
+
 stop_app() {
   local pkg
   pkg=$(__guess_package_name "$1")
