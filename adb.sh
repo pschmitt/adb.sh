@@ -6,6 +6,7 @@ usage() {
   echo "- app"
   echo "- battery"
   echo "- charging"
+  echo "- click TEXT"
   echo "- key"
   echo "- lock"
   echo "- screen"
@@ -112,6 +113,10 @@ case "$1" in
   text|sendtext)
     shift
     send_text "$@"
+    ;;
+  click|cl|tap|touch)
+    shift
+    click_text "$@"
     ;;
   scan|discover|discovery)
     shift

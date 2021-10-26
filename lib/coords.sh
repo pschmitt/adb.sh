@@ -30,3 +30,14 @@ get_screen_coords_of_text() {
   # Result
   echo "$(( (cx1 + cx2) / 2 )) $(( (cy1 + cy2) / 2 ))"
 }
+
+click_text() {
+  local coord
+
+  if ! coord=$(get_screen_coords_of_text "$*")
+  then
+    return 1
+  fi
+
+  adb shell input tap $coord
+}
