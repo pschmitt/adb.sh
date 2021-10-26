@@ -101,6 +101,9 @@ __known_packages() {
     "Kodi"|"kodi"|"xbmc")
       echo "org.xbmc.kodi"
       ;;
+    "Deckboard"|"deckboard"|"bdoard")
+      echo "com.rivafarabi.deckboard.pro"
+      ;;
     *)
       echo "Unknown app" >&2
       return 2
