@@ -16,6 +16,7 @@ _adb.sh() {
         "exec:Execute arbitrary command from library"
         "key:Send key input"
         "lock:Lock screen"
+        "replace-text:Replace current field content with text"
         "scan:Scan the network for listening ADB daemons"
         "screen:Set screen state"
         "screenshot:Take a screenshot"

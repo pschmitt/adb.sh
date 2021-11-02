@@ -108,7 +108,7 @@ case "$1" in
     esac
     ;;
   key)
-    send_key "$2"
+    send_key "$2" "$3"
     ;;
   type|teletype)
     teletype
@@ -116,6 +116,10 @@ case "$1" in
   text|sendtext)
     shift
     send_text "$@"
+    ;;
+  replace-text|retext)
+    shift
+    replace_text "$@"
     ;;
   click|cl|tap|touch)
     shift

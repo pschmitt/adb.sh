@@ -2,6 +2,7 @@
 
 send_key() {
   local key="$1"
+  local repeat="${2:-1}"
 
   if [[ -z "$key" ]]
   then
@@ -58,7 +59,13 @@ send_key() {
       ;;
   esac
 
-  adb shell input keyevent "$key"
+  local keys=()
+  for repeat in $(seq 1 "$repeat")
+  do
+    keys+=("$key")
+  done
+
+  adb shell input keyevent "${keys[@]}"
 }
 
 send_text() {
@@ -73,6 +80,18 @@ send_text() {
 
   echo "Writing text '$text' on the device" >&2
   adb shell input text "'$text'"
+}
+
+replace_text() {
+  local count=100
+
+  send_key right "$count"
+  send_key del "$count"
+
+  if [[ -n "$*" ]]
+  then
+    send_text "$*"
+  fi
 }
 
 teletype() {
