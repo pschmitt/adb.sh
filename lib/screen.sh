@@ -25,6 +25,10 @@ screen_off() {
   screen_is_off || adb shell input keyevent POWER
 }
 
+screen_get_autoration() {
+  [[ "$(adb shell settings get system accelerometer_rotation)" == 1 ]]
+}
+
 screen_set_autorotation() {
   local val=1
 

@@ -55,6 +55,19 @@ case "$1" in
   wake)
     wake_screen
     ;;
+  autorotation|autorotate|autorot|autor)
+    case "$2" in
+      status)
+        screen_get_autoration && echo on || echo off
+        ;;
+      off|disable|0|false)
+        screen_disable_autorotation
+        ;;
+      on|enable|1|true)
+        screen_enable_autorotation
+        ;;
+    esac
+    ;;
   rot|rotate)
     if [[ -z "$2" ]] || [[ "$2" == "status" ]]
     then

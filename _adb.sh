@@ -17,6 +17,7 @@ _adb.sh() {
         "key:Send key input"
         "lock:Lock screen"
         "replace-text:Replace current field content with text"
+        "autorotation:Control auto rotation settings"
         "rotate:Rotate the screen"
         "scan:Scan the network for listening ADB daemons"
         "screen:Set screen state"
@@ -47,6 +48,17 @@ _adb.sh() {
             "vol_down:VOLUME_DOWN"
             "paste:PASTE"
             "menu:MENU"
+          )
+          if [[ "$#words" == "3" ]]
+          then
+            _describe -t commands "adb.sh commands" actions -V1
+          fi
+          ;;
+        autorotation)
+          local -a actions=(
+            "on:Enable screen autorotation"
+            "off:Disable screen autorotation"
+            "status:Get current screen autorotation status (on or off)"
           )
           if [[ "$#words" == "3" ]]
           then
