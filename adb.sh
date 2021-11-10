@@ -55,6 +55,14 @@ case "$1" in
   wake)
     wake_screen
     ;;
+  rot|rotate)
+    if [[ -z "$2" ]] || [[ "$2" == "status" ]]
+    then
+      screen_rotation_status
+    else
+      screen_rotate "$2"
+    fi
+    ;;
   screen|display)
     case "$2" in
       on)
@@ -63,8 +71,16 @@ case "$1" in
       off)
         screen_off
         ;;
-      *)
+      status)
         screen_is_on && echo "on" || echo "off"
+        ;;
+      rotate)
+        if [[ -z "$3" ]] || [[ "$3" == "status" ]]
+        then
+          screen_rotation_status
+        else
+          screen_rotate "$3"
+        fi
         ;;
     esac
     ;;

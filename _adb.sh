@@ -17,6 +17,7 @@ _adb.sh() {
         "key:Send key input"
         "lock:Lock screen"
         "replace-text:Replace current field content with text"
+        "rotate:Rotate the screen"
         "scan:Scan the network for listening ADB daemons"
         "screen:Set screen state"
         "screenshot:Take a screenshot"
@@ -52,11 +53,27 @@ _adb.sh() {
             _describe -t commands "adb.sh commands" actions -V1
           fi
           ;;
+        rotate)
+          local -a actions=(
+            "status:Get current screen rotation state (landscape, portrait etc)"
+            "auto:Turn on auto screen rotation"
+            "disable:Disable auto screen rotation"
+            "landscape:Lanscape mode"
+            "portrait:Portrait mode"
+            "landscape-inverted:Inverted landscape mode"
+            "portrait-inverted:Inverted portrait mode"
+          )
+          if [[ "$#words" == "3" ]]
+          then
+            _describe -t commands "adb.sh commands" actions -V1
+          fi
+          ;;
         screen|display)
           local -a actions=(
             "on:Turn screen on"
             "off:Turn screen off"
-            "state:Show current screen state (on|off)"
+            "rotate:Rotate screen"
+            "status:Show current screen state (on|off)"
           )
           if [[ "$#words" == "3" ]]
           then
